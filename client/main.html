@@ -1,0 +1,56 @@
+
+  <head>
+    <title>IoT server</title>
+  </head>
+  <body>
+
+    {{> PhidgetGPS}}
+
+  </body>
+
+  <template name="PhidgetGPS">
+
+ <ul>
+    {{#each data}}
+      <li class="data time"> Latitude : {{Latitude}} </li>
+      <li class="data time"> Longitude : {{Longitude}} </li>
+    {{/each}}
+ </ul>
+
+         <h3>GPS data visualization on Google Map</h3>
+         <!--The div element for the map -->
+         <div id="map"></div>
+
+         <script type="application/javascript">
+         // Initialize and add the map
+           function initMap() {
+           //setInterval(function() {
+               d = Gpsdata.findOne({},{Latitude:1, Longitude:1});
+               latitude = Number(d.Latitude);
+               longitude = Number(d.Longitude);
+               console.log(latitude);
+               console.log(longitude);
+
+               // current location
+               loc = {lat:latitude, lng:longitude };  // loc = {lat:33.97939, lng:-6.868155 };
+
+               // The map, centered at the current location
+               var map = new google.maps.Map(
+               document.getElementById('map'), {zoom: 18, center: loc});
+               // The marker, positioned at the current location
+               var marker = new google.maps.Marker({position: loc, map: map});
+          // }, 10000);
+
+           }
+         </script>
+
+         Load the API from the specified URL
+         * The async attribute allows the browser to render the page while the API loads
+         * The key parameter will contain our own API key
+         * The callback parameter executes the initMap() function
+
+         <script async defer
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAalDDkkVOdmVbCOqoM8QD2CzzOORAX1zQ&callback=initMap">
+         </script>
+
+</template>
