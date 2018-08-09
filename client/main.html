@@ -8,12 +8,27 @@
 
   </body>
 
+<!--<template name="PhidgetGPS2">
+    <ul>
+       {{#each data2}}
+         <li> Client 2 </li>
+         <li class="data2"> Latitude : {{Latitude}} </li>
+         <li class="data2"> Longitude : {{Longitude}} </li>
+       {{/each}}
+    </ul>
+</template>-->
+
+
   <template name="PhidgetGPS">
 
  <ul>
     {{#each data}}
-      <li class="data time"> Latitude : {{Latitude}} </li>
-      <li class="data time"> Longitude : {{Longitude}} </li>
+      <li> Client 1 </li>
+      <li class="data"> Latitude : {{Latitude1}} </li>
+      <li class="data"> Longitude : {{Longitude1}} </li>
+      <li> Client 2 </li>
+      <li class="data"> Latitude : {{Latitude2}} </li>
+      <li class="data"> Longitude : {{Longitude2}} </li>
     {{/each}}
  </ul>
 
@@ -25,9 +40,9 @@
          // Initialize and add the map
            function initMap() {
            //setInterval(function() {
-               d = Gpsdata.findOne({},{Latitude:1, Longitude:1});
-               latitude = Number(d.Latitude);
-               longitude = Number(d.Longitude);
+               d = Gpsdata.findOne({},{Latitude1:1, Longitude1:1});
+               latitude = Number(d.Latitude1);
+               longitude = Number(d.Longitude1);
                console.log(latitude);
                console.log(longitude);
 
@@ -38,9 +53,25 @@
                var map = new google.maps.Map(
                document.getElementById('map'), {zoom: 18, center: loc});
                // The marker, positioned at the current location
-               var marker = new google.maps.Marker({position: loc, map: map});
+               //var marker = new google.maps.Marker({position: loc, map: map});
           // }, 10000);
 
+               setMarkers(map);
+           }
+
+
+           function setMarkers(map) {
+             clients = [
+               ['client1', Number(d.Latitude1), Number(d.Longitude1)],
+               ['client2', Number(d.Latitude2), Number(d.Longitude2)],
+             ];
+             for (var i = 0; i < clients.length; i++) {
+                 var client = clients[i];
+                 var marker = new google.maps.Marker({
+                   position: {lat: client[1], lng: client[2]},
+                   map: map
+                 });
+             }
            }
          </script>
 
@@ -50,7 +81,7 @@
          * The callback parameter executes the initMap() function
 
          <script async defer
-         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAalDDkkVOdmVbCOqoM8QD2CzzOORAX1zQ&callback=initMap">
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWbjPrLsP1vaQv5nALhDlB_IMAehbP7o0&callback=initMap">
          </script>
 
 </template>
