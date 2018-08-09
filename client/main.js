@@ -28,6 +28,6 @@ Template.PhidgetGPS.helpers({
 });*/
 
 // 'updatingGPSData1' function is called each 3 seconds.
-/*setInterval(function() {
-  Meteor.call('updatingGPSData1');
-}, 3000);*/
+setInterval(function() {
+  Meteor.call('updatingGPSData');
+}, 3000);

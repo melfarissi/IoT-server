@@ -46,6 +46,8 @@ wss.on('connection', function connection(ws) {
           // This operator will change the value of specified fields.
           Gpsdata.update(Gpsdata.findOne({})._id,{$set: {Latitude1: tab1[0]}});
           Gpsdata.update(Gpsdata.findOne({})._id,{$set: {Longitude1: tab1[1]}});
+          Gpsdata.update(Gpsdata.findOne({})._id,{$set: {Latitude2: tab2[0]}});
+          Gpsdata.update(Gpsdata.findOne({})._id,{$set: {Longitude2: tab2[1]}});
         }/*,
       'insertGPSData2': function(){
           Gpsdata2.insert({
