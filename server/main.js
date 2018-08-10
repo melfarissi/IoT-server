@@ -5,11 +5,8 @@ Meteor.startup(() => {
 
 });
 
-// Create a MongoDB Collection for client1
+// Create a MongoDB Collection
 Gpsdata = new Mongo.Collection("gpsdata");
-
-// Create a MongoDB Collection for client2
-//Gpsdata2 = new Mongo.Collection("gpsdata2");
 
 const WebSocket = require('ws');
 
@@ -42,17 +39,12 @@ wss.on('connection', function connection(ws) {
           });
           },
       'updatingGPSData': function(){
-          // To change the values of a document without deleting it first, we need to use the $set operator.
+          // To change the values of a document without deleting it first,
+          // we need to use the $set operator.
           // This operator will change the value of specified fields.
           Gpsdata.update(Gpsdata.findOne({})._id,{$set: {Latitude1: tab1[0]}});
           Gpsdata.update(Gpsdata.findOne({})._id,{$set: {Longitude1: tab1[1]}});
           Gpsdata.update(Gpsdata.findOne({})._id,{$set: {Latitude2: tab2[0]}});
           Gpsdata.update(Gpsdata.findOne({})._id,{$set: {Longitude2: tab2[1]}});
-        }/*,
-      'insertGPSData2': function(){
-          Gpsdata2.insert({
-              Latitude: tab2[0],
-              Longitude: tab2[1],
-          });
-        }*/
+        }
   });

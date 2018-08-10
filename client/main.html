@@ -39,7 +39,7 @@
          <script type="application/javascript">
          // Initialize and add the map
            function initMap() {
-           //setInterval(function() {
+              //setInterval(function() {
                d = Gpsdata.findOne({},{Latitude1:1, Longitude1:1});
                latitude = Number(d.Latitude1);
                longitude = Number(d.Longitude1);
@@ -54,7 +54,7 @@
                document.getElementById('map'), {zoom: 18, center: loc});
                // The marker, positioned at the current location
                //var marker = new google.maps.Marker({position: loc, map: map});
-          // }, 10000);
+             //}, 10000);
 
                setMarkers(map);
            }
